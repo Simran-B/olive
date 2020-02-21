@@ -42,85 +42,60 @@ if(UNIX)
             "OpenColorIO library path"
     )
 elseif(WIN32)
-#   find_path(OCIO_BASE_DIR
-#           include/OpenColorIO/OpenColorABI.h
-#           build/export/OpenColorABI.h
-#       HINTS
-#           "${OCIO_LOCATION}"
-#           "$ENV{OCIO_LOCATION}"
-#   )
-    message(STATUS "\$ENV{OCIO_LOCATION} = $ENV{OCIO_LOCATION}")
-    #set(OCIO_BASE_DIR "$ENV{OCIO_LOCATION}/build")
-    set(OCIO_BASE_DIR "C:/Daten/Olive/OpenColorIO/build")
-    message(STATUS "OCIO_BASE_DIR = ${OCIO_BASE_DIR}")
-
-# Is this supposed to point at OpenColorIO.lib or its dependencies (tinyxml.lib etc.)?
-# There is some stuff in build\ext\dist and build\ext\build
-# Or can be use the static OpenColorIO.lib? (does it include everything?)
-#   find_path(OCIO_LIBRARY_DIR
-#           OpenColorIO.lib
-#       HINTS
-#           "${OCIO_LOCATION}"
-#           "$ENV{OCIO_LOCATION}"
-#           "${OCIO_BASE_DIR}"
-#       PATH_SUFFIXES
-#           lib/
-#           static/
-#           Release/
-#           RelWithDebInfo/
-#           Debug/
-#       DOC
-#           "OpenColorIO library path"
-#   )
-    set(OCIO_LIBRARY_DIR "${OCIO_BASE_DIR}/src/core/static/Release")
-    message(STATUS "OCIO_LIBRARY_DIR = ${OCIO_LIBRARY_DIR}")
-
+    find_path(OCIO_BASE_DIR
+            include/OpenColorIO/OpenColorABI.h
+        HINTS
+            "${OCIO_LOCATION}"
+            "$ENV{OCIO_LOCATION}"
+    )
+    find_path(OCIO_LIBRARY_DIR
+            OpenColorIO.lib
+        HINTS
+            "${OCIO_LOCATION}"
+            "$ENV{OCIO_LOCATION}"
+            "${OCIO_BASE_DIR}"
+        PATH_SUFFIXES
+            lib/
+        DOC
+            "OpenColorIO library path"
+    )
 endif()
 
-#find_path(OCIO_INCLUDE_DIR
-#        OpenColorABI.h
-#        OpenColorIO/OpenColorABI.h
-#    HINTS
-#        "${OCIO_LOCATION}"
-#        "$ENV{OCIO_LOCATION}"
-#        "${OCIO_BASE_DIR}"
-#    PATH_SUFFIXES
-#        include/
-#        build/export/
-#    DOC
-#        "OpenColorIO headers path"
-#)
-set(OCIO_INCLUDE_DIR "${OCIO_BASE_DIR}/export")
-message(STATUS "OCIO_INCLUDE_DIR = ${OCIO_INCLUDE_DIR}")
+find_path(OCIO_INCLUDE_DIR
+        OpenColorIO/OpenColorABI.h
+    HINTS
+        "${OCIO_LOCATION}"
+        "$ENV{OCIO_LOCATION}"
+        "${OCIO_BASE_DIR}"
+    PATH_SUFFIXES
+        include/
+    DOC
+        "OpenColorIO headers path"
+)
 
 list(APPEND OCIO_INCLUDE_DIRS ${OCIO_INCLUDE_DIR})
 
-#find_library(OCIO_LIBRARY
-#        OpenColorIO
-#    HINTS
-#        "${OCIO_LOCATION}"
-#        "$ENV{OCIO_LOCATION}"
-#        "${OCIO_BASE_DIR}"
-#    PATH_SUFFIXES
-#        lib/
-#    DOC
-#        "OCIO's ${OCIO_LIB} library path"
-#)
-set(OCIO_LIBRARY "${OCIO_LIBRARY_DIR}/OpenColorIO.lib")
-message(STATUS "OCIO_LIBRARY = ${OCIO_LIBRARY}")
+find_library(OCIO_LIBRARY
+        OpenColorIO
+    HINTS
+        "${OCIO_LOCATION}"
+        "$ENV{OCIO_LOCATION}"
+        "${OCIO_BASE_DIR}"
+    PATH_SUFFIXES
+        lib/
+    DOC
+        "OCIO's ${OCIO_LIB} library path"
+)
 
 list(APPEND OCIO_LIBRARIES ${OCIO_LIBRARY})
 
-#if(OCIO_INCLUDE_DIRS AND EXISTS "${OCIO_INCLUDE_DIR}/OpenColorIO/OpenColorABI.h")
-if(OCIO_INCLUDE_DIRS AND EXISTS "${OCIO_INCLUDE_DIR}/OpenColorABI.h")
-    #file(STRINGS ${OCIO_INCLUDE_DIR}/OpenColorIO/OpenColorABI.h
-    file(STRINGS ${OCIO_INCLUDE_DIR}/OpenColorABI.h
+if(OCIO_INCLUDE_DIRS AND EXISTS "${OCIO_INCLUDE_DIR}/OpenColorIO/OpenColorABI.h")
+    file(STRINGS ${OCIO_INCLUDE_DIR}/OpenColorIO/OpenColorABI.h
         fullVersion
         REGEX
         "#define OCIO_VERSION .*$")
     string(REGEX MATCH "[0-9]+.[0-9]+.[0-9]+" OCIO_VERSION ${fullVersion})
 endif()
-message(STATUS "OCIO_INCLUDE_DIRS = ${OCIO_INCLUDE_DIRS}")
 
 # handle the QUIETLY and REQUIRED arguments and set OCIO_FOUND to TRUE if
 # all listed variables are TRUE

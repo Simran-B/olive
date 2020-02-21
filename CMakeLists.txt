@@ -37,17 +37,21 @@ if(UNIX AND NOT APPLE AND NOT DEFINED OpenGL_GL_PREFERENCE)
   set(OpenGL_GL_PREFERENCE LEGACY)
 endif()
 
-find_package(OpenGL REQUIRED)
-
-find_package(OpenColorIO REQUIRED)
-
-find_package(OpenImageIO REQUIRED)
-
 # Why does AppVeyor not hand through env vars?
 set(CMAKE_PREFIX_PATH
   "C:/Daten/Olive/ffmpeg-4.1.3-win64-dev"
   "C:/Qt/5.12.3/msvc2017_64"
 )
+set(OPENEXR_INCLUDE_DIRS
+  "C:/tools/vcpkg/packages/openexr_x86-windows/include"
+)
+set(OCIO_LOCATION "C:/tools/vcpkg/packages/opencolorio_x86-windows")
+
+find_package(OpenGL REQUIRED)
+
+find_package(OpenColorIO REQUIRED)
+
+find_package(OpenImageIO REQUIRED)
 
 find_package(Qt5 5.6 REQUIRED
   COMPONENTS

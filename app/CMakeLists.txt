@@ -86,6 +86,7 @@ target_include_directories(
   PRIVATE
   ${OPENCOLORIO_INCLUDE_DIR}
   ${OIIO_INCLUDE_DIRS}
+  ${OPENEXR_INCLUDE_DIRS}
   ${FFMPEG_INCLUDE_DIRS}
 )
 
