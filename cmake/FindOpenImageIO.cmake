@@ -22,6 +22,7 @@
 # language governing permissions and limitations under the Apache License.
 #
 
+set(OIIO_LOCATION "C:/tools/vcpkg/packages/openimageio_x86-windows")
 if(UNIX)
     find_path(OIIO_BASE_DIR
             include/OpenImageIO/oiioversion.h
@@ -60,6 +61,7 @@ elseif(WIN32)
             "OpenImageIO library path"
     )
 endif()
+message(STATUS "OIIO_BASE_DIR = ${OIIO_BASE_DIR}")
 
 find_path(OIIO_INCLUDE_DIR
         OpenImageIO/oiioversion.h

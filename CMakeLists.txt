@@ -43,6 +43,12 @@ find_package(OpenColorIO REQUIRED)
 
 find_package(OpenImageIO REQUIRED)
 
+# Why does AppVeyor not hand through env vars?
+set(CMAKE_PREFIX_PATH
+  "C:/Daten/Olive/ffmpeg-4.1.3-win64-dev"
+  "C:/Qt/5.12.3/msvc2017_64"
+)
+
 find_package(Qt5 5.6 REQUIRED
   COMPONENTS
   Core
