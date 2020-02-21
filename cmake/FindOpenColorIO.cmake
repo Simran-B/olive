@@ -72,6 +72,7 @@ find_path(OCIO_INCLUDE_DIR
     DOC
         "OpenColorIO headers path"
 )
+message(STATUS "OCIO_INCLUDE_DIR = ${OCIO_INCLUDE_DIR}")
 
 list(APPEND OCIO_INCLUDE_DIRS ${OCIO_INCLUDE_DIR})
 

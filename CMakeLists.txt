@@ -45,7 +45,7 @@ set(CMAKE_PREFIX_PATH
 set(OPENEXR_INCLUDE_DIRS
   "C:/tools/vcpkg/packages/openexr_x86-windows/include"
 )
-set(OCIO_LOCATION "C:/tools/vcpkg/packages/opencolorio_x86-windows")
+set(OCIO_LOCATION "C:/tools/vcpkg/packages/opencolorio_x64-windows")
 
 find_package(OpenGL REQUIRED)
 

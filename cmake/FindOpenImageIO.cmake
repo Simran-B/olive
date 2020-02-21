@@ -22,7 +22,7 @@
 # language governing permissions and limitations under the Apache License.
 #
 
-set(OIIO_LOCATION "C:/tools/vcpkg/packages/openimageio_x86-windows")
+set(OIIO_LOCATION "C:/tools/vcpkg/packages/openimageio_x64-windows")
 if(UNIX)
     find_path(OIIO_BASE_DIR
             include/OpenImageIO/oiioversion.h
